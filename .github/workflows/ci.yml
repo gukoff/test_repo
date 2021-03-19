@@ -14,9 +14,13 @@ jobs:
       with:
         fetch-depth: '0'
     - name: Bump version and push tag
+      id: version-bump
       uses: anothrNick/github-tag-action@1.34.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         INITIAL_VERSION: 1.0.0
         RELEASE_BRANCHES: .*
         WITH_V: false
+
+    - name: Get color
+      run: echo "New tag is ${{ steps.version-bump.outputs.new_tag }}"
